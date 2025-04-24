@@ -26,8 +26,13 @@ def get_file_metadata(file):
     }
 
 def analyze_text(file):
-    """Processed of textcl archives."""
-    content = file.read().decode('utf-8')
+    """Procesamiento de archivos de texto"""
+    try:
+        content = file.read().decode('utf-8')
+    except UnicodeDecodeError:
+        file.seek(0)
+        content = file.read().decode('latin-1')
+    
     lines = content.split('\n')
     words = content.split()
     
@@ -36,7 +41,8 @@ def analyze_text(file):
         'lines': len(lines),
         'words': len(words),
         'characters': len(content),
-        'type': 'text'
+        'type': 'text',
+        'content': content  # Añadimos el contenido para mostrarlo en el frontend
     })
     return metadata
 
@@ -61,12 +67,21 @@ def upload_file():
     file.stream.seek(0)
     
     if file.filename.lower().endswith('.txt'):
-        result = analyze_text(file)
+            result = analyze_text(file)
     else:
-        result = get_file_metadata(file)
-        result['type'] = 'other'
+            result = get_file_metadata(file)
+            
+            # Mejorar la detección del tipo usando filetype si está disponible
+            if file_type is not None:
+                result['type'] = file_type.mime.split('/')[0]  # 'image', 'video', etc.
+                result['mime_type'] = file_type.mime
+                result['extension'] = file_type.extension
+            else:
+                result['type'] = 'other'
     
     return jsonify(result)
+  
+  
 
 if __name__ == '__main__':
     app.run(debug=True)
