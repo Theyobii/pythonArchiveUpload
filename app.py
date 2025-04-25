@@ -42,7 +42,7 @@ def analyze_text(file):
         'words': len(words),
         'characters': len(content),
         'type': 'text',
-        'content': content  # Añadimos el contenido para mostrarlo en el frontend
+        'content': content  
     })
     return metadata
 
@@ -71,9 +71,9 @@ def upload_file():
     else:
             result = get_file_metadata(file)
             
-            # Mejorar la detección del tipo usando filetype si está disponible
+            
             if file_type is not None:
-                result['type'] = file_type.mime.split('/')[0]  # 'image', 'video', etc.
+                result['type'] = file_type.mime.split('/')[0]  
                 result['mime_type'] = file_type.mime
                 result['extension'] = file_type.extension
             else:
