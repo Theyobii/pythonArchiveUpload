@@ -1,0 +1,91 @@
+        
+.text-content-box {
+width: 100%;
+margin: 15px 0;
+padding: 15px;
+border: 1px solid #ccc;
+border-radius: 5px;
+background-color: #f9f9f9;
+white-space: pre-wrap;
+font-family: monospace;
+overflow: auto;
+max-height: 400px;
+background-color: #f5f5f5;
+border-left: 4px solid #4c53ad;
+}
+
+.text-content-title {
+font-weight: bold;
+margin-bottom: 10px;
+color: #333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(173, 225, 255);
+    padding: 2rem;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 1000px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 {
+    color: black;
+}
+
+input[type="file"] {
+    display: none
+}
+
+.custom-file-label{
+    background-color: rgb(0,0,128);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-label:hover{
+    background-color: rgb(0,0,128);
+}
+
+button {
+    background-color: rgb(0,0,128);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+#result, #result * {
+    color: black !important;
+
+
+}
+.result,.error, .preview {
+    margin-top: 2rem;
+    color: black !important;
+}
+
+ul {
+    color: white;
+    padding-left: 1rem;
+}
+
+#file-name{
+    font-style: italic;
+    margin-left: 10px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: rgb(175,225,255);
+    color: #555;
+}

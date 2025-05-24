@@ -1,19 +1,21 @@
-from flask import Flask, request, jsonify, render_template, send_file
+from flask import Flask, request, jsonify, render_template, send_file #type: ignore
 import os
-from werkzeug.utils import secure_filename
-import filetype  
+from werkzeug.utils import secure_filename # type: ignore
+import filetype   # type: ignore
 
 app = Flask(__name__)
 
-# Configuration
+#tipo de archivos permitidos
 ALLOWED_EXTENSIONS = {'txt', 'png', 'jpg', 'jpeg', 'pdf', 'docx'}  # Extensions allowed
 
-def allowed_file(filename): #files admited
+
+def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+#Obtiene metadatos basicos de los archivos
 def get_file_metadata(file):
-    """Obtain basic metadata of any archive."""
+
     file.seek(0, os.SEEK_END)
     size = file.tell()
     file.seek(0)
@@ -25,8 +27,9 @@ def get_file_metadata(file):
         'extension': file.filename.rsplit('.', 1)[1].lower() if '.' in file.filename else None
     }
 
+#Procesa archivos de texto
 def analyze_text(file):
-    """Procesamiento de archivos de texto"""
+
     try:
         content = file.read().decode('utf-8')
     except UnicodeDecodeError:
@@ -46,10 +49,12 @@ def analyze_text(file):
     })
     return metadata
 
+#ruta para mostrar formulario
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
+#ruta para obtener formulario
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
